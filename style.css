@@ -80,9 +80,17 @@
         }
         
         .card-img-top {
-            width: 215px; /* Cambia según lo que necesites */
+            width: 200px; 
             height: 150px;
-            object-fit: cover; /
+            object-fit: cover;
+            display: block;
+            margin: 0 auto; /* Centra horizontalmente */
+            max-width: 100%; /* Evita que se salga del card */ /
+        }
 
+       
+            
+            
+        }
 
     </style>
