@@ -79,5 +79,23 @@
             border-color: #ffffff;
         }
         
+        .card-img-top {
+            width: 200px; 
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto; /* Centra horizontalmente */
+            
+            max-width: 100%; /* Evita que se salga del card */ /
+        }
+
+        .card {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            padding: 10px; /* Ajusta el margen según lo necesites */
+            
+            
+        }
 
     </style>
