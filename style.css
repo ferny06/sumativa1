@@ -1,4 +1,5 @@
 <style>
+        
         * {
             font-family: monospace;
         }
@@ -7,8 +8,10 @@
 
         
         }
+
+        
         nav {
-            background-color: rgb(227, 208, 239);
+            background-color: rgb(180, 46, 162);
             padding: 10px;
         }
         ul {
@@ -27,7 +30,7 @@
         }
         a:hover
         {
-            background-color: rgb(171, 143, 181);
+            background-color: rgb(180, 143, 193);
             color: white;
             border-radius: 16px;
         }
@@ -54,5 +57,9 @@
             border-collapse: collapse;
             margin-bottom: 40px;
             margin-top: 40px;
+        }
+
+        .navbar {
+            background-color: #cfb6f1 !important;
         }
     </style>
