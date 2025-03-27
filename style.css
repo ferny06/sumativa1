@@ -66,4 +66,18 @@
         .navbar a {
             color: white;
         }
+
+        .btn-primary {
+            color: #ffffff;
+            background-color:  hsl(265, 68%, 83%);
+            border-color: #ffffff;
+            
+        }
+
+        .btn-primary:hover {
+            background-color: hsl(265, 78%, 73%);
+            border-color: #ffffff;
+        }
+        
+
     </style>
