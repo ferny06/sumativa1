@@ -4,7 +4,7 @@
             font-family: monospace;
         }
         body
-        {background-color: #ffffff;
+        {background-color: #f5f5f5;
 
         
         }
@@ -24,14 +24,14 @@
         }
         a
         {
-            color: aliceblue;
+            color: rgb(255, 255, 255);
             text-decoration: none;
             padding: 5px;
         }
         a:hover
         {
-            background-color: rgb(180, 143, 193);
-            color: white;
+            background-color:  hsl(265, 78%, 73%);
+            color: rgb(254, 254, 254);
             border-radius: 16px;
         }
 
@@ -60,6 +60,10 @@
         }
 
         .navbar {
-            background-color: #cfb6f1 !important;
+            background-color: hsl(265, 68%, 83%) !important;
+        }
+
+        .navbar a {
+            color: white;
         }
     </style>
