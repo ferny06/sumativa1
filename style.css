@@ -79,5 +79,10 @@
             border-color: #ffffff;
         }
         
+        .card-img-top {
+            width: 200px; /* Cambia según lo que necesites */
+            height: 150px;
+            object-fit: cover; /
+
 
     </style>
