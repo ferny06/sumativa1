@@ -5,6 +5,7 @@
         }
         body
         {background-color: #f5f5f5;
+         
 
         
         }
@@ -84,18 +85,21 @@
             height: 150px;
             object-fit: cover;
             display: block;
-            margin: 0 auto; /* Centra horizontalmente */
-            
-            max-width: 100%; /* Evita que se salga del card */ /
+            margin: 0 auto; 
+            max-width: 100%;  /
         }
 
         .card {
             display: flex;
-            justify-content: center; /* Centra horizontalmente */
-            align-items: center; /* Centra verticalmente */
-            padding: 10px; /* Ajusta el margen según lo necesites */
+            justify-content: center;
+            align-items: center; 
+            padding: 10px; 
             
             
+        }
+
+        h1 img {
+            vertical-align: middle;
         }
 
     </style>
