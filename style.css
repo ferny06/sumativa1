@@ -48,7 +48,7 @@
         border-color: #ffffff;
     }
     
-    /* Efectos mejorados para las cards */
+    
     .card {
         display: flex;
         justify-content: center;
@@ -108,4 +108,10 @@
         background-color: hsl(265, 68%, 83%); 
         color: #ffffff;
     }
+
+    .boton-lila {
+        color: #ffffff;
+        background-color: hsl(265, 68%, 83%);
+    }
+    
 </style>
