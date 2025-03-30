@@ -112,6 +112,7 @@
     .boton-lila {
         color: #ffffff;
         background-color: hsl(265, 68%, 83%);
+        border-color: #ffffff;
     }
     
 </style>
