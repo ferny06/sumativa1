@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Agregar contenedor de alerta si no existe
+
     if (!document.getElementById('alerta')) {
         const alertaContainer = document.createElement('div');
         alertaContainer.id = 'alerta';
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(alertaContainer);
     }
 
-    // Funciones para manejar alertas
     const ocultarAlerta = () => {
         const alerta = document.getElementById("alerta");
         alerta.classList.add("visually-hidden");
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let valido = true;
             limpiarErrores();
             
-            // Validar Nombre completo
+
             if (!nombre.value.trim()) {
                 mostrarError(nombre, 'Por favor ingresa tu nombre completo');
                 document.getElementById('fb-nombre').style.display = 'block';
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 valido = false;
             }
             
-            // Validar Email
+
             if (!email.value.trim()) {
                 mostrarError(email, 'Por favor ingresa tu correo electrónico');
                 document.getElementById('fb-email').style.display = 'block';
@@ -70,28 +69,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 mostrarError(email, 'Por favor ingresa un correo electrónico válido');
                 valido = false;
             }
-            
-            // Validar Teléfono
+   
             if (telefono.value.trim() && !validarTelefono(telefono.value)) {
                 mostrarError(telefono, 'Por favor ingresa un número de teléfono válido (ej: +56912345678 o 912345678)');
                 valido = false;
             }
             
-            // Validar País
+
             if (!pais.value.trim()) {
                 mostrarError(pais, 'Por favor ingresa tu país');
                 document.getElementById('fb-pais').style.display = 'block';
                 valido = false;
             }
             
-            // Validar Ciudad
+
             if (!ciudad.value.trim()) {
                 mostrarError(ciudad, 'Por favor ingresa tu ciudad');
                 document.getElementById('fb-ciudad').style.display = 'block';
                 valido = false;
             }
-            
-            // Validar Contraseña
+
             if (password && !validarPasswordCompleja(password.value)) {
                 mostrarError(password, 'La contraseña no cumple con los requisitos de seguridad');
                 valido = false;
@@ -103,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             mostrarAlerta('success', 'Registro completado correctamente.');
-            // formulario.submit(); // Descomentar en producción
+
             return false;
         });
     }
@@ -118,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let valido = true;
             limpiarErrores();
             
-            // Validar Email
+
             if (!email.value.trim()) {
                 mostrarError(email, 'Por favor ingresa tu correo electrónico');
                 document.getElementById('fb-email').style.display = 'block';
@@ -127,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mostrarError(email, 'Por favor ingresa un correo electrónico válido');
                 valido = false;
             }
-            
-            // Validar Contraseña
+
             if (!password.value.trim()) {
                 mostrarError(password, 'Por favor ingresa tu contraseña');
                 document.getElementById('fb-password').style.display = 'block';
@@ -141,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             mostrarAlerta('success', 'Inicio de sesión exitoso. Redireccionando...');
-            // formulario.submit(); // Descomentar en producción
+
             return false;
         });
     }
@@ -160,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let valido = true;
             limpiarErrores();
             
-            // Validar Nombre completo
+
             if (!nombre.value.trim()) {
                 mostrarError(nombre, 'Por favor ingresa tu nombre completo');
                 document.getElementById('fb-nombre').style.display = 'block';
@@ -170,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 valido = false;
             }
 
-            // Validar Email
+
             if (!email.value.trim()) {
                 mostrarError(email, 'Por favor ingresa tu correo electrónico');
                 document.getElementById('fb-email').style.display = 'block';
@@ -180,27 +176,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 valido = false;
             }
             
-            // Validar Teléfono
+
             if (telefono.value.trim() && !validarTelefono(telefono.value)) {
                 mostrarError(telefono, 'Por favor ingresa un número de teléfono válido (ej: +56912345678 o 912345678)');
                 valido = false;
             }
             
-            // Validar País
+
             if (!pais.value.trim()) {
                 mostrarError(pais, 'Por favor ingresa tu país');
                 document.getElementById('fb-pais').style.display = 'block';
                 valido = false;
             }
             
-            // Validar Ciudad
+
             if (!ciudad.value.trim()) {
                 mostrarError(ciudad, 'Por favor ingresa tu ciudad');
                 document.getElementById('fb-ciudad').style.display = 'block';
                 valido = false;
             }
 
-            // Validar Mensaje
+
             if (!mensaje.value.trim()) {
                 mostrarError(mensaje, 'Por favor ingresa tu mensaje');
                 document.getElementById('fb-mensaje').style.display = 'block';
@@ -216,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             mostrarAlerta('success', 'Mensaje enviado correctamente.');
-            // formulario.submit(); // Descomentar en producción
+
             return false;
         });
     }
@@ -253,12 +249,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function limpiarErrores() {
-        // Ocultar todos los feedback blocks
+
         document.querySelectorAll('[id^="fb-"]').forEach(el => {
             el.style.display = 'none';
         });
         
-        // Limpiar mensajes de error
+
         document.querySelectorAll('.text-danger').forEach(el => el.remove());
         document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
     }
