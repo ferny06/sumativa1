@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Agregar contenedor de alerta si no existe
+    if (!document.getElementById('alerta')) {
+        const alertaContainer = document.createElement('div');
+        alertaContainer.id = 'alerta';
+        alertaContainer.className = 'alert visually-hidden';
+        alertaContainer.style.position = 'fixed';
+        alertaContainer.style.top = '20px';
+        alertaContainer.style.right = '20px';
+        alertaContainer.style.zIndex = '1000';
+        document.body.appendChild(alertaContainer);
+    }
+
+    // Funciones para manejar alertas
+    const ocultarAlerta = () => {
+        const alerta = document.getElementById("alerta");
+        alerta.classList.add("visually-hidden");
+    };
+
+    const mostrarAlerta = (tipo, mensaje) => {
+        const alerta = document.getElementById("alerta");
+        alerta.innerHTML = mensaje;
+        alerta.className = "alert alert-" + tipo;
+        alerta.classList.remove("visually-hidden");
+        setTimeout(ocultarAlerta, 5000);
+    };
 
     const formularioRegistro = document.querySelector('form[action="/enviar-mensaje"]'); 
     const formularioLogin = document.querySelector('form:not([action])'); 
@@ -11,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (formularioContacto && document.querySelector('h3').textContent.includes('Contacto')) {
         configurarValidacionContacto(formularioContacto);
     }
-    
 
     function configurarValidacionRegistro(formulario) {
         formulario.addEventListener('submit', function(event) {
@@ -22,53 +46,67 @@ document.addEventListener('DOMContentLoaded', function() {
             const telefono = document.getElementById('telefono');
             const pais = document.getElementById('pais');
             const ciudad = document.getElementById('ciudad');
+            const password = document.getElementById('password');
             
             let valido = true;
             limpiarErrores();
             
-
+            // Validar Nombre completo
             if (!nombre.value.trim()) {
                 mostrarError(nombre, 'Por favor ingresa tu nombre completo');
+                document.getElementById('fb-nombre').style.display = 'block';
                 valido = false;
             } else if (nombre.value.trim().length < 3) {
                 mostrarError(nombre, 'El nombre debe tener al menos 3 caracteres');
                 valido = false;
             }
             
-
+            // Validar Email
             if (!email.value.trim()) {
                 mostrarError(email, 'Por favor ingresa tu correo electrónico');
+                document.getElementById('fb-email').style.display = 'block';
                 valido = false;
             } else if (!validarEmail(email.value)) {
                 mostrarError(email, 'Por favor ingresa un correo electrónico válido');
                 valido = false;
             }
             
-
+            // Validar Teléfono
             if (telefono.value.trim() && !validarTelefono(telefono.value)) {
                 mostrarError(telefono, 'Por favor ingresa un número de teléfono válido (ej: +56912345678 o 912345678)');
                 valido = false;
             }
             
-
+            // Validar País
             if (!pais.value.trim()) {
                 mostrarError(pais, 'Por favor ingresa tu país');
+                document.getElementById('fb-pais').style.display = 'block';
                 valido = false;
             }
             
-
+            // Validar Ciudad
             if (!ciudad.value.trim()) {
                 mostrarError(ciudad, 'Por favor ingresa tu ciudad');
+                document.getElementById('fb-ciudad').style.display = 'block';
                 valido = false;
             }
             
-            if (valido) {
-                alert('Registro válido. Se enviará la información.');
-                formulario.submit();
+            // Validar Contraseña
+            if (password && !validarPasswordCompleja(password.value)) {
+                mostrarError(password, 'La contraseña no cumple con los requisitos de seguridad');
+                valido = false;
             }
+            
+            if (!valido) {
+                mostrarAlerta('warning', 'Por favor, completa todos los campos correctamente.');
+                return false;
+            }
+            
+            mostrarAlerta('success', 'Registro completado correctamente.');
+            // formulario.submit(); // Descomentar en producción
+            return false;
         });
     }
-    
 
     function configurarValidacionLogin(formulario) {
         formulario.addEventListener('submit', function(event) {
@@ -80,31 +118,33 @@ document.addEventListener('DOMContentLoaded', function() {
             let valido = true;
             limpiarErrores();
             
-
+            // Validar Email
             if (!email.value.trim()) {
                 mostrarError(email, 'Por favor ingresa tu correo electrónico');
+                document.getElementById('fb-email').style.display = 'block';
                 valido = false;
             } else if (!validarEmail(email.value)) {
                 mostrarError(email, 'Por favor ingresa un correo electrónico válido');
                 valido = false;
             }
             
-
+            // Validar Contraseña
             if (!password.value.trim()) {
                 mostrarError(password, 'Por favor ingresa tu contraseña');
-                valido = false;
-            } else if (password.value.length < 6) {
-                mostrarError(password, 'La contraseña debe tener al menos 6 caracteres');
+                document.getElementById('fb-password').style.display = 'block';
                 valido = false;
             }
             
-            if (valido) {
-                alert('Inicio de sesión exitoso. Redireccionando...');
-                formulario.submit();
+            if (!valido) {
+                mostrarAlerta('warning', 'Por favor, completa todos los campos.');
+                return false;
             }
+            
+            mostrarAlerta('success', 'Inicio de sesión exitoso. Redireccionando...');
+            // formulario.submit(); // Descomentar en producción
+            return false;
         });
     }
-    
 
     function configurarValidacionContacto(formulario) {
         formulario.addEventListener('submit', function(event) {
@@ -120,56 +160,67 @@ document.addEventListener('DOMContentLoaded', function() {
             let valido = true;
             limpiarErrores();
             
-
+            // Validar Nombre completo
             if (!nombre.value.trim()) {
                 mostrarError(nombre, 'Por favor ingresa tu nombre completo');
+                document.getElementById('fb-nombre').style.display = 'block';
                 valido = false;
             } else if (nombre.value.trim().length < 3) {
                 mostrarError(nombre, 'El nombre debe tener al menos 3 caracteres');
                 valido = false;
             }
 
+            // Validar Email
             if (!email.value.trim()) {
                 mostrarError(email, 'Por favor ingresa tu correo electrónico');
+                document.getElementById('fb-email').style.display = 'block';
                 valido = false;
             } else if (!validarEmail(email.value)) {
                 mostrarError(email, 'Por favor ingresa un correo electrónico válido');
                 valido = false;
             }
             
-
+            // Validar Teléfono
             if (telefono.value.trim() && !validarTelefono(telefono.value)) {
                 mostrarError(telefono, 'Por favor ingresa un número de teléfono válido (ej: +56912345678 o 912345678)');
                 valido = false;
             }
             
-
+            // Validar País
             if (!pais.value.trim()) {
                 mostrarError(pais, 'Por favor ingresa tu país');
+                document.getElementById('fb-pais').style.display = 'block';
                 valido = false;
             }
             
-
+            // Validar Ciudad
             if (!ciudad.value.trim()) {
                 mostrarError(ciudad, 'Por favor ingresa tu ciudad');
+                document.getElementById('fb-ciudad').style.display = 'block';
                 valido = false;
             }
 
+            // Validar Mensaje
             if (!mensaje.value.trim()) {
                 mostrarError(mensaje, 'Por favor ingresa tu mensaje');
+                document.getElementById('fb-mensaje').style.display = 'block';
                 valido = false;
             } else if (mensaje.value.trim().length < 10) {
                 mostrarError(mensaje, 'El mensaje debe tener al menos 10 caracteres');
                 valido = false;
             }
             
-            if (valido) {
-                alert('Mensaje válido. Se enviará tu consulta.');
-                formulario.submit();
+            if (!valido) {
+                mostrarAlerta('warning', 'Por favor, completa todos los campos correctamente.');
+                return false;
             }
+            
+            mostrarAlerta('success', 'Mensaje enviado correctamente.');
+            // formulario.submit(); // Descomentar en producción
+            return false;
         });
     }
-    
+
 
     function validarEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -181,17 +232,33 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(telefono);
     }
     
+    function validarPasswordCompleja(password) {
+        const validations = [
+            password.length >= 8,
+            password.length <= 20,
+            /[A-Z]/.test(password),
+            /[0-9]/.test(password),
+            /[^A-Za-z0-9]/.test(password)
+        ];
+        return validations.every(validation => validation);
+    }
+    
     function mostrarError(input, mensaje) {
         const formGroup = input.closest('.mb-3') || input.closest('.col-md-6');
         const errorText = document.createElement('div');
         errorText.className = 'text-danger mt-1';
         errorText.textContent = mensaje;
         formGroup.appendChild(errorText);
-        
         input.classList.add('is-invalid');
     }
     
     function limpiarErrores() {
+        // Ocultar todos los feedback blocks
+        document.querySelectorAll('[id^="fb-"]').forEach(el => {
+            el.style.display = 'none';
+        });
+        
+        // Limpiar mensajes de error
         document.querySelectorAll('.text-danger').forEach(el => el.remove());
         document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
     }
